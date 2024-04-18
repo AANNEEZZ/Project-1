@@ -33,6 +33,3 @@ def edit_invoice_data(duration, new_kitta_number, new_city, new_direction, new_a
         file.write(f"Price(in NPR): {new_price}\n")
         file.write(f'Duration: {duration} months')
         file.write(f"Date: {date}\n")
-
-def return_invoice(name, kitta_number, city, direction, area, price, duration):
-    
