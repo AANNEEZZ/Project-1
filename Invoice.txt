@@ -13,11 +13,11 @@ Direction: North
 Area(in Anna): 4
 Price(in NPR): 50000
 Duration: 10 months
-Date: 2024-04-18 10:32:27
+Date: 2024-04-18 11:01:45
 
 Kitta Number: 102
 City/District: Pokhara
 Direction: East
 Area(in Anna): 5
 Price(in NPR): 60000
-Duration: Anij Gurung monthsDate: 2024-04-18 10:32:33
+Duration: 10 monthsDate: 2024-04-18 11:02:00
