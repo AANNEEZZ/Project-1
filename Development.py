@@ -2,7 +2,7 @@ import pyfiglet
 from pyfiglet import Figlet
 
 from land_info import land_info, edit_land_info
-from invoice_details import invoice_written, print_invoice_data, edit_invoice_data
+from invoice_details import invoice_written, print_invoice_data, edit_invoice_data, return_invoice
 from management import return_land, record_customer_details, check_customer_details
 
 while True:
@@ -73,6 +73,9 @@ while True:
         if check_customer_details(r'Customers.txt', return_question, return_question_1):
             return_land(r'Land.txt', return_question_1)
             print(f"Kitta number {return_question_1} has been returned by {return_question}.")
+            # Generate return invoice
+            returned_land = [land for land in lands if land[0] == return_question_1][0]
+            return_invoice(return_question, return_question_1, returned_land[1], returned_land[2], returned_land[3], returned_land[4])
         else:
             print(f"No rent for Kitta number {return_question_1} has been made by {return_question}.")
 
