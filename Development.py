@@ -1,37 +1,40 @@
 import pyfiglet
+import tabulate
+from tabulate import tabulate
+
 from pyfiglet import Figlet
 
 from land_info import land_info, edit_land_info
 from invoice_details import invoice_written, print_invoice_data, edit_invoice_data, return_invoice
 from management import return_land, record_customer_details, check_customer_details
 
+
+print(pyfiglet.figlet_format("Techno Property", justify="center", font="starwars", width=110))
+print("\n\t\t\t\t\tHello Customer!")
+
 while True:
-    lands = land_info(r'land.txt')
+    lands = land_info(r'Land.txt')
+    headers = ["Kitta Number", "City/District", "Direction", "Area(in Anna)", "Price(In NPR)", "Availability"]
 
-    print(pyfiglet.figlet_format("Techno Property", justify="center", font="starwars", width=110))
-    print("\n\t\t\t\t\tHello Customer!")
     print("\n\t\t\t\t\tWhat would you like to do?")
-    print("\n\t\t\t\t1. Print the List of Lands.")
-    print("\t\t\t\t2. Print the List of Available Lands.")
-    print("\t\t\t\t3. Print the List of Not Available Lands.")
-    print("\t\t\t\t4. Rent land.")
-    print("\t\t\t\t5. Return land.")
+    print("\n\t\t\t\t1.Print the List of Lands.")
+    print("\t\t\t\t2.Print the List of Available Lands.")
+    print("\t\t\t\t3.Print the List of Not Available Lands.")
+    print("\t\t\t\t4.Rent land.")
+    print("\t\t\t\t5.Return land.")
 
-    question_1 = int(input("\n Enter the above given options:  "))
+    question_1 = int(input("\nEnter the above given options:  "))
 
     if question_1 == 1:
-        for land in lands:
-            print(f"Kitta Number: {land[0]}, City/District: {land[1]}, Direction: {land[2]}, Area(in Anna): {land[3]}, Price(In NPR): {land[4]}, Availability: {land[5]} ")
+        print(tabulate(lands, headers=headers, tablefmt='pretty'))
         
     elif question_1 == 2:
         Available_lands = [land for land in lands if 'Available' in land]
-        for land in Available_lands:
-            print(f"Kitta Number: {land[0]}, City/District: {land[1]}, Direction: {land[2]}, Area(in Anna): {land[3]}, Price(In NPR): {land[4]}, Availability: {land[5]} ")
+        print(tabulate(Available_lands, headers=headers, tablefmt='pretty'))
 
     elif question_1 == 3:
         not_available_lands = [land for land in lands if 'Not_Available' in land]
-        for land in not_available_lands:
-            print(f"Kitta Number: {land[0]}, City/District: {land[1]}, Direction: {land[2]}, Area(in Anna): {land[3]}, Price(In NPR): {land[4]}, Availability: {land[5]} ")
+        print(tabulate(not_available_lands, headers=headers, tablefmt='pretty'))
 
     elif question_1 == 4:
         Available_lands = [land for land in lands if 'Available' in land]
@@ -57,9 +60,10 @@ while True:
             rent_question_3 = input("\nWhich land do you want to rent? (Enter the Kitta number): ")
             rented_land_2 = [land for land in Available_lands if land[0] == int(rent_question_3)]
             if rented_land_2:
+                duration_2 = int(input("\nHow long are you going to rent the land for? (in months): "))
                 rented_land_2 = rented_land_2[0]
                 print("Rent Successfull")
-                edit_invoice_data(name,rented_land_2[0],rented_land_2[1],rented_land_2[2],rented_land_2[3],rented_land_2[4])
+                edit_invoice_data(duration_2, rented_land_2[0], rented_land_2[1],rented_land_2[2],rented_land_2[3],rented_land_2[4])
                 edit_land_info(r'Land.txt', rented_land_2[0])
                 record_customer_details(r'Customers.txt', name, rent_question_3)
             else:

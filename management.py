@@ -1,4 +1,3 @@
-
 def return_land(filename, kitta_number):
     updated_lands = []
     with open(filename, 'r') as file:
@@ -7,7 +6,7 @@ def return_land(filename, kitta_number):
             if len(data) >= 6:
                 if int(data[0]) == kitta_number and data[5].strip() == 'Not_Available':
                     data[5] = 'Available'
-                updated_lands.append(','.join(data))
+                updated_lands.append(', '.join(data))
 
     with open(filename, 'w') as file:
         for land in updated_lands:
@@ -20,7 +19,7 @@ def return_land(filename, kitta_number):
 
     with open(customers_file, 'w') as file:
         for customer in customers:
-            name, rented_kitta_number = customer.strip().split(',')
+            rented_kitta_number = customer.strip().split(',')
             if int(rented_kitta_number) == kitta_number:
                 continue  # Skip the line for the returned land
             file.write(customer)

@@ -11,13 +11,5 @@ Kitta Number: 101
 City/District: Kathmandu
 Direction: North
 Area(in Anna): 4
-Price(in NPR): 50000
-Duration: 10 months
-Date: 2024-04-18 10:32:27
-
-Kitta Number: 102
-City/District: Pokhara
-Direction: East
-Area(in Anna): 5
-Price(in NPR): 60000
-Duration: Anij Gurung monthsDate: 2024-04-18 10:32:33
+Duration: 50000 months
+Return Date: 2024-04-18 10:41:02
