@@ -1,0 +1,75 @@
+import datetime
+import pyfiglet
+from pyfiglet import Figlet
+
+def land_info(filename):
+    Lands = []
+    with open(filename,'r') as file:
+        for line in file:
+            data = line.strip().replace(',','').split()
+            land = [int(data[0]), data[1], data[2], int(data[3]), int(data[4]), data[5]]
+            Lands.append(land)
+    return Lands
+
+def invoice_written(name, kitta_number, city, direction, area, price):
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open('Invoice.txt','w') as file:
+        file.write("\tINVOICE\n")
+        file.write("FROM:\n")
+        file.write("Techno Property Nepal\n")
+        file.write("TO:\n")
+        file.write(f"{name}\n")
+        file.write(f"Kitta Number: {kitta_number}\n")
+        file.write(f"City/District: {city}\n")
+        file.write(f"Direction: {direction}\n")
+        file.write(f"Area(in Anna): {area}\n")
+        file.write(f"Price(in NPR): {price}\n")
+        file.write(f"Date: {date}\n")
+
+
+def print_invoice_data():
+    with open('Invoice.txt', 'r') as file:
+        invoice_data = file.read()
+        print(invoice_data)
+
+while True:
+    print(pyfiglet.figlet_format("Techno Property", justify = "center", font="avatar", width = 110))
+    print("\n\t\t\t\t\tHello Customer!")
+    question_1 = input("\nDo you want to know which lands are available? (Y/N): ")
+    if question_1.upper() == "Y":
+        lands = land_info(r'Land.txt')
+        Available_lands = [land for land in lands if 'Available' in land]
+        for land in Available_lands:
+            print(f"Kitta Number: {land[0]}, City/District: {land[1]}, Direction: {land[2]}, Area(in Anna): {land[3]}, Price(In NPR): {land[4]}, Availability: {land[5]} ")
+        
+        question_3 = input("\nAre you here to rent a land or to return a land? (rent/return): ")
+        if question_3.lower() == "rent":
+            for land in Available_lands:
+               	
+            rent_question_1 = input("\nWhich land would you want to rent? (Enter the Kitta number): ")
+            rented_land = [land for land in Available_lands if land[0] == int(rent_question_1)]
+            name = input("\nWhat is your name?: ")
+            if rented_land:
+                rented_land = rented_land[0]
+                print("Rent successful")
+                invoice_written(name, rented_land[0], rented_land[1], rented_land[2], rented_land[3], rented_land[4])
+                print("\nHere is your Invoice: \n")
+                print_invoice_data()
+                print("\nInvoice printed successfully!")
+                
+                question_4 = input("Would you like to rent another land? (Y/N): ")
+                if question_4.upper() == "Y":
+                    print("\nUpdated Available Lands:\n")
+                    
+                else:
+                    break
+
+            else:
+                print(f"Kitta number:{rent_question_1} is not available.")
+
+    else:
+        question_2 = input("\nWould You like to try again? (Y/N): ")
+        if question_2.upper() != "Y":
+            break
+        else:
+            continue

@@ -1,0 +1,23 @@
+FROM:
+             _____ _____ ____ _     _      ____    ____  ____  ____  ____  _____ ____ _____ ___  _
+            /__ __Y  __//   _Y \ /|/ \  /|/  _ \  /  __\/  __\/  _ \/  __\/  __//  __Y__ __\\  \//
+              / \ |  \  |  / | |_||| |\ ||| / \|  |  \/||  \/|| / \||  \/||  \  |  \/| / \   \  / 
+              | | |  /_ |  \_| | ||| | \||| \_/|  |  __/|    /| \_/||  __/|  /_ |    / | |   / /  
+              \_/ \____\\____|_/ \|\_/  \|\____/  \_/   \_/\_\\____/\_/   \____\\_/\_\ \_/  /_/   
+                                                                                                  
+TO:
+Anij Gurung
+Kitta Number: 101
+City/District: Kathmandu
+Direction: North
+Area(in Anna): 4
+Price(in NPR): 50000
+Duration: 10 months
+Date: 2024-04-17 22:52:01
+
+Kitta Number: 103
+City/District: Lalitpur
+Direction: South
+Area(in Anna): 10
+Price(in NPR): 100000
+Duration: Anij Gurung monthsDate: 2024-04-17 22:52:05
