@@ -20,4 +20,5 @@ City/District: Pokhara
 Direction: East
 Area(in Anna): 5
 Price(in NPR): 60000
-Duration: 10 monthsDate: 2024-04-18 11:02:00
+Duration: 10 months
+Date: 2024-04-18 11:02:00
