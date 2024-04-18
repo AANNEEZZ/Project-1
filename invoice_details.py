@@ -33,3 +33,12 @@ def edit_invoice_data(duration, new_kitta_number, new_city, new_direction, new_a
         file.write(f"Price(in NPR): {new_price}\n")
         file.write(f'Duration: {duration} months')
         file.write(f"Date: {date}\n")
+
+def return_invoice(name, kitta_number):
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open('return invoice.txt', 'w') as file:
+        file.write("FROM:\n")
+        file.write(pyfiglet.figlet_format("Techno Property", justify="center", font="avatar", width=110))
+        file.write("TO:\n")
+        file.write(f"{name}\n")
+        file.write(f"Kitta Number: {kitta_number}\n")
