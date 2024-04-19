@@ -7,18 +7,26 @@ FROM:
                                                                                                   
 TO:
 Anij Gurung
-Kitta Number: 101
-City/District: Kathmandu
-Direction: North
-Area(in Anna): 4
-Price(in NPR): 50000
+Kitta Number: 103
+City/District: Lalitpur
+Direction: South
+Area(in Anna): 10
+Price(in NPR): 100000
 Duration: 10 months
-Date: 2024-04-18 11:01:45
+Date: 2024-04-18 11:35:57
 
-Kitta Number: 102
-City/District: Pokhara
-Direction: East
-Area(in Anna): 5
-Price(in NPR): 60000
+Kitta Number: 104
+City/District: Bharatpur
+Direction: West
+Area(in Anna): 8
+Price(in NPR): 85000
 Duration: 10 months
-Date: 2024-04-18 11:02:00
+Date: 2024-04-18 11:36:05
+
+Kitta Number: 105
+City/District: Bijaypur
+Direction: East
+Area(in Anna): 3
+Price(in NPR): 40000
+Duration: 5 months
+Date: 2024-04-18 11:36:20

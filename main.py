@@ -6,7 +6,7 @@ from pyfiglet import Figlet
 
 from land_info import land_info, edit_land_info
 from invoice_details import invoice_written, print_invoice_data, edit_invoice_data, return_invoice
-from management import return_land, record_customer_details, check_customer_details
+from management import return_land, record_customer_details, check_customer_details,count_customer_details
 
 
 print(pyfiglet.figlet_format("Techno Property", justify="center", font="starwars", width=110))
@@ -52,36 +52,42 @@ while True:
 
             Available_lands = [land for land in lands if 'Available' in land]
             
+            while True:
+                rent_question_2 = input("\nWould you like to rent another land? (y/n): ")
+                if rent_question_2.lower() == 'y':
+                    rent_question_3 = input("\nWhich land do you want to rent? (Enter the Kitta number): ")
+                    rented_land_2 = [land for land in Available_lands if land[0] == int(rent_question_3)]
+                    if rented_land_2:
+                        duration_2 = int(input("\nHow long are you going to rent the land for? (in months): "))
+                        rented_land_2 = rented_land_2[0]
+                        print("Rent Successful")
+                        edit_invoice_data(duration_2, rented_land_2[0], rented_land_2[1], rented_land_2[2], rented_land_2[3], rented_land_2[4])
+                        edit_land_info(r'Land.txt', rented_land_2[0])
+                        record_customer_details(r'Customers.txt', name, rent_question_3)
+                    else:
+                        print("That land is not available")
+                else:
+                    break
+
+            print_invoice_data()
         else:
             print("That land is not available")
-        
-        rent_question_2 = input("\nWould you like to rent another land? (y/n): ")
-        if rent_question_2.lower() == 'y':
-            rent_question_3 = input("\nWhich land do you want to rent? (Enter the Kitta number): ")
-            rented_land_2 = [land for land in Available_lands if land[0] == int(rent_question_3)]
-            if rented_land_2:
-                duration_2 = int(input("\nHow long are you going to rent the land for? (in months): "))
-                rented_land_2 = rented_land_2[0]
-                print("Rent Successfull")
-                edit_invoice_data(duration_2, rented_land_2[0], rented_land_2[1],rented_land_2[2],rented_land_2[3],rented_land_2[4])
-                edit_land_info(r'Land.txt', rented_land_2[0])
-                record_customer_details(r'Customers.txt', name, rent_question_3)
-            else:
-                print("That land is not available")
 
-        print_invoice_data()
 
     elif question_1 == 5:
         return_question = input("What is your name?: ")
-        return_question_1 = int(input("Enter the Kitta number of the land you want to return: "))
-        if check_customer_details(r'Customers.txt', return_question, return_question_1):
-            return_land(r'Land.txt', return_question_1)
-            print(f"Kitta number {return_question_1} has been returned by {return_question}.")
-            # Generate return invoice
-            returned_land = [land for land in lands if land[0] == return_question_1][0]
-            return_invoice(return_question, return_question_1, returned_land[1], returned_land[2], returned_land[3], returned_land[4])
-        else:
-            print(f"No rent for Kitta number {return_question_1} has been made by {return_question}.")
+        if count_customer_details(r'Customers.txt', return_question) > 0:
+            while True:
+
+                return_question_1 = int(input("Enter the Kitta number of the land you want to return: "))
+                if check_customer_details(r'Customers.txt', return_question, return_question_1):
+                    return_land(r'Land.txt', return_question_1)
+                    print(f"Kitta number {return_question_1} has been returned by {return_question}.")
+                    # Generate return invoice
+                    returned_land = [land for land in lands if land[0] == return_question_1][0]
+                    return_invoice(return_question, return_question_1, returned_land[1], returned_land[2], returned_land[3], returned_land[4])
+                else:
+                    print(f"No rent for Kitta number {return_question_1} has been made by {return_question}.")
 
 
         

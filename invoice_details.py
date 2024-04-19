@@ -47,3 +47,4 @@ def return_invoice(name, kitta_number, city, direction, area, duration):
         file.write(f"Area(in Anna): {area}\n")
         file.write(f"Duration: {duration} months\n")
         file.write(f"Return Date: {date}\n")
+    

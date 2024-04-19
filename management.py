@@ -44,3 +44,13 @@ def check_customer_details(filename, name, kitta_number):
                 return True
     return False
 
+def count_customer_details(filename, name):
+    counter = 0
+    with open(filename,'r')as file:
+        for line in file:
+            data = line.split(', ')
+            if name == data[0]:
+                counter +=1
+        
+        return counter
+
