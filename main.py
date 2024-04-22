@@ -6,7 +6,7 @@ from pyfiglet import Figlet
 
 from land_info import land_info, edit_land_info
 from invoice_details import invoice_written, print_invoice_data, edit_invoice_data, return_invoice
-from management import return_land, record_customer_details, check_customer_details,count_customer_details
+from management import return_land, record_customer_details, check_customer_details,count_customer_details, read_customer_details
 
 
 print(pyfiglet.figlet_format("Techno Property", justify="center", font="starwars", width=110))
@@ -75,19 +75,32 @@ while True:
 
 
     elif question_1 == 5:
-        return_question = input("What is your name?: ")
-        if count_customer_details(r'Customers.txt', return_question) > 0:
-            while True:
+        return_question = input("\nWhat is your name?: ")
+        while True:
+            customer_details = read_customer_details(r'Customers.txt', return_question)
+            match = [customer for customer in customer_details if customer[0] == return_question]
+            counter = count_customer_details(r'Customers.txt', return_question)
+            print(f"\n{return_question} has rented {counter} under their name.")
+            for customer in customer_details:
+                print(f"{customer[1]}")
+            return_question_1 = int(input("\nEnter the Kitta number of the land you want to return: "))
+            if check_customer_details(r'Customers.txt', return_question, return_question_1):
+                return_land(r'Land.txt', return_question_1)
+                print(f"Kitta number {return_question_1} has been returned by {return_question}.")
+                # Generate return invoice
+                returned_land = [land for land in lands if land[0] == return_question_1][0]
+                return_invoice(return_question, returned_land[0], returned_land[1], returned_land[2], returned_land[3], returned_land[4])
+            else:
+                print(f"No rent for Kitta number {return_question_1} has been made by {return_question}.")
+            
+            if count_customer_details(r'Customers.txt', return_question) > 0:
+                return_question_2 = input("Would you like to return other lands? (y/n): ")
+                if return_question_2.lower() != "y":
+                    break
 
-                return_question_1 = int(input("Enter the Kitta number of the land you want to return: "))
-                if check_customer_details(r'Customers.txt', return_question, return_question_1):
-                    return_land(r'Land.txt', return_question_1)
-                    print(f"Kitta number {return_question_1} has been returned by {return_question}.")
-                    # Generate return invoice
-                    returned_land = [land for land in lands if land[0] == return_question_1][0]
-                    return_invoice(return_question, return_question_1, returned_land[1], returned_land[2], returned_land[3], returned_land[4])
-                else:
-                    print(f"No rent for Kitta number {return_question_1} has been made by {return_question}.")
+            else:
+                break    
+            
 
 
         
