@@ -19,8 +19,8 @@ def return_land(filename, kitta_number):
 
     with open(customers_file, 'w') as file:
         for customer in customers:
-            rented_kitta_number = customer.strip().split(',')
-            if int(rented_kitta_number) == kitta_number:
+            rented_kitta_number = int(customer.strip().split(',')[0])
+            if rented_kitta_number == kitta_number:
                 continue  # Skip the line for the returned land
             file.write(customer)
 
