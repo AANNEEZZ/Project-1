@@ -1,0 +1,7 @@
+Name: Anij Gurung
+Kitta Number: 103
+City/District: Lalitpur
+Direction: South
+Area: 10
+Price: 100000
+
