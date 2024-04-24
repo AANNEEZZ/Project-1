@@ -21,31 +21,33 @@ def return_land(filename, kitta_number):
             if rented_kitta_number != kitta_number:
                 file.write(customer)
 
-def record_customer_details(filename, name, kitta_number):
+def record_customer_details(filename, name, kitta_number, date, duration):
     with open(filename, 'r') as file:
         for line in file:
             data = line.strip().split(', ')
             if name == data[0] and int(kitta_number) == int(data[1]):
                 return
     with open(filename, 'a') as file:
-        file.write(f"{name}, {kitta_number}\n")
+        file.write(f"{name}, {kitta_number}, {date}, {duration}\n")
         
 def check_customer_details(filename, name, kitta_number):
     with open(filename, 'r') as file:
         for line in file:
-            data = line.split(', ')
+            data = line.strip().split(', ')
             if name == data[0] and int(data[1]) == kitta_number:
                 return True
     return False
 
-def read_customer_details(filename, name,):
+def read_customer_details(filename, name):
     customers = []
-    with open (filename, 'r')as file:
+    with open(filename, 'r') as file:
         for line in file:
             data = line.strip().split(', ')
-            customer = [data[0], data[1]]
-            customers.append(customer)
+            if data[0] == name:
+                customer = [data[0], int(data[1]), int(data[-1])]
+                customers.append(customer)
     return customers
+
 
 def count_customer_details(filename, name):
     counter = 0
@@ -55,4 +57,4 @@ def count_customer_details(filename, name):
             if name == data[0]:
                 counter +=1
 
-        return counter
+        return counter 

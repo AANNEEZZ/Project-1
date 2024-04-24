@@ -53,18 +53,43 @@ def calculate_total():
     with open('Invoice.txt', 'a') as file:
         file.write(f"\n\n{' '*18}Total Amount = {total_amount}\n")
 
-
-
 def print_invoice_data():
     with open('Invoice.txt', 'r') as file:
         invoice_data = file.read()
         print(invoice_data)        
 
+def return_invoice_blank():
+    with open(r'return invoice.txt', 'w')as file:
+        file.write("")
+
 def return_invoice(name, kitta_number, city_district, direction, area, price):
-    with open(r'return invoice.txt', 'w') as file:
+    with open(r'return invoice.txt', 'a') as file:
         file.write(f"Name: {name}\n")
         file.write(f"Kitta Number: {kitta_number}\n")
         file.write(f"City/District: {city_district}\n")
         file.write(f"Direction: {direction}\n")
         file.write(f"Area: {area}\n")
         file.write(f"Price: {price}\n\n")
+
+def return_invoice_with_fine(name, kitta_number, city_district, direction, area, price, fine):
+    price = int(price)
+    fine = int(fine)
+    with open(r'return invoice.txt', 'a') as file:
+        file.write(f"Name: {name}\n")
+        file.write(f"Kitta Number: {kitta_number}\n")
+        file.write(f"City/District: {city_district}\n")
+        file.write(f"Direction: {direction}\n")
+        file.write(f"Area: {area}\n")
+        file.write(f"Price: {price} + {fine}\n")
+
+def calculate_invoice_total():
+    total = 0
+    with open(r'return invoice.txt', 'r') as file:
+        for line in file:
+            if "Price(in NPR):" in line:
+                price = float(line.split(":")[1].strip())
+                total += price
+    
+    # Append total amount to the invoice file
+    with open(r'return invoice.txt', 'a') as file:
+        file.write(f"\n\n{' '*18}Total Amount = {total}\n")

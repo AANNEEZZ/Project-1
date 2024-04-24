@@ -5,3 +5,9 @@ Direction: North
 Area: 4
 Price: 50000
 
+Name: Anij Gurung
+Kitta Number: 101
+City/District: Kathmandu
+Direction: North
+Area: 4
+Price: 50000 + -374850000
