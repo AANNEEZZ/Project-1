@@ -18,6 +18,7 @@ while True:
     print("\t\t\t\t3.Print the List of Not Available Lands.")
     print("\t\t\t\t4.Rent land.")
     print("\t\t\t\t5.Return land.")
+    print("\t\t\t\t6.Refund")
     print("\t\t\t\t0.Exit")
 
     question_1 = int(input("\nEnter the above given options:  "))
@@ -30,19 +31,19 @@ while True:
             print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*land))
             
     elif question_1 == 2:
-        Available_lands = [land for land in lands if 'Available' in land]
+        available_lands = [land for land in lands if land[-1] == 'Available']
         print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*headers))
         print("-" * 90)
-        for land in Available_lands:
-            print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*land))    
+        for land in available_lands:
+            print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*land))
 
     elif question_1 == 3:
-        not_available_lands = [land for land in lands if 'Not_Available' in land]
+        not_available_lands = [land for land in lands if land[-1] == 'Not_Available']
         print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*headers))
         print("-" * 90)
         for land in not_available_lands:
             print("{:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(*land))
-
+            
     elif question_1 == 4:
         Available_lands = [land for land in lands if 'Available' in land]
         rent_question_1 = input("\nWhich land would you want to rent? (Enter the Kitta number): ")
@@ -89,7 +90,6 @@ while True:
         return_invoice_blank()
         return_question = input("\nWhat is your name?: ")
         customer_details = read_customer_details(r'Customers.txt', return_question)
-        match = [customer for customer in customer_details if customer[0] == return_question]
         counter = count_customer_details(r'Customers.txt', return_question)
         
         if counter > 0: 
@@ -111,7 +111,6 @@ while True:
                     counter = count_customer_details(r'Customers.txt', return_question) #updating the counter
                     customer_details = read_customer_details(r'Customers.txt', return_question) #updating the customer_details
                     
-                    
                 else:    
                     if check_customer_details(r'Customers.txt', return_question, return_question_1):
                         return_land(r'Land.txt', return_question_1)
@@ -130,9 +129,47 @@ while True:
                 
                 else:
                     break
-            
         else:
             print(f"\n{return_question} hasn't rented any land. ")
+
+    elif question_1 == 6:
+        refund_question = input("\nWhat is your name?: ")
+        customer_details = read_customer_details(r'Customers.txt', refund_question)
+        counter = count_customer_details(r'Customers.txt', refund_question) #re-declaring the counter
+        lands = land_info(r'Land.txt')
+        if counter > 0:
+            print(f"\n{refund_question} has rented {counter} under their name.")
+            for customer in customer_details:
+                print(f"{customer[1]}")
+
+            refund_land = int(input("\nEnter the kitta number of the land of which you want refund: "))
+            refund_duration = int(input("\nHow long have you rented the land?: "))
+
+            rented_months = 0
+            total_price = 0
+
+        # Find the rented months for the specified land
+            for customer in customer_details:
+                if refund_land == customer[1]:
+                    rented_months = customer[-1]
+                    break
+
+        # Find the total price for the specified land
+            for land in lands:
+                if refund_land == land[0]:
+                    total_price = land[-2]
+                    break
+
+            remaining_months = rented_months - refund_duration
+            refund_rate = remaining_months / rented_months
+            refund_amount = total_price * refund_rate
+            print(f"\nRefund Amount: NPR {refund_amount}")
+            return_land(r'Land.txt', refund_land)
+        
+        else:
+            print(f"{refund_question} hasn't rented any lands.")
+            
+
 
     elif question_1 == 0:
         break

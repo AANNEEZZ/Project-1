@@ -48,7 +48,6 @@ def read_customer_details(filename, name):
                 customers.append(customer)
     return customers
 
-
 def count_customer_details(filename, name):
     counter = 0
     with open(filename,'r')as file:
@@ -58,3 +57,5 @@ def count_customer_details(filename, name):
                 counter +=1
 
         return counter 
+    
+    
